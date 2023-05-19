@@ -15,7 +15,7 @@ const DiscoverMoviesFilter = (props: DiscoverMoviesFilterProps) => {
       <Button
         onClick={handleOpen}
         label="Filters"
-        className="w-full sm:w-fit sm:absolute sm:top-0 sm:right-0"
+        className="w-fit"
         endIcon={<Filter size={18} />}
       />
       <Modal title="Discover movies filter" show={open} onClose={handleClose}>

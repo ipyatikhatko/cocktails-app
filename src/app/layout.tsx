@@ -3,8 +3,9 @@ import "./globals.css";
 import { Poppins } from "next/font/google";
 import clsx from "clsx";
 import { Search } from "react-feather";
+import QueryProvider from "@/QueryProvider";
 
-const inter = Poppins({ weight: "400", subsets: ["latin"] });
+const inter = Poppins({ weight: ["300", "400", "700"], subsets: ["latin"] });
 
 export const metadata = {
   title: "Create Next App",
@@ -19,17 +20,20 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <nav className="px-4 w-full bg-slate-100 fixed top-0 left-0 z-50 h-[8vh]">
-          <TextField
-            startIcon={<Search />}
-            containerClassName="h-full"
-            className="bg-transparent"
-            placeholder="Search movies here..."
-            value=""
-            onChange={() => {}}
-          />
-        </nav>
-        <main className="pt-[8vh]">{children}</main>
+        <QueryProvider>
+          <nav className="px-4 h-[8vh] w-full flex items-center backdrop-blur-sm fixed top-0 left-0 z-[55]">
+            <div className="absolute inset-0 bg-gradient-to-br from-white to-blue-400 opacity-60"></div>
+            <TextField
+              startIcon={<Search className="text-slate-500" size={18} />}
+              containerClassName="z-50 p-2 rounded-full bg-white border border-slate-200 shadow-md w-[260px]"
+              className="bg-transparent text-sm placeholder:text-slate-500"
+              placeholder="Search movies here..."
+              value=""
+              onChange={() => {}}
+            />
+          </nav>
+          <main className="pt-[8vh]">{children}</main>
+        </QueryProvider>
       </body>
     </html>
   );

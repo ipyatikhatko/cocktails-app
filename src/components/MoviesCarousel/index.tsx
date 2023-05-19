@@ -1,14 +1,12 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import MoviesCarouselItem from "./MoviesCarouselItem";
-import { DiscoverMovies } from "@/models/DiscoverMovies";
+import { MovieWithCredits } from "@/models/Movie";
 import clsx from "clsx";
 import { Play, Pause } from "react-feather";
 
-// Импорты...
-
 type Props = {
-  movies: DiscoverMovies["results"];
+  movies: MovieWithCredits[];
 };
 
 const MoviesCarousel = ({ movies }: Props) => {
@@ -55,7 +53,7 @@ const MoviesCarousel = ({ movies }: Props) => {
       setRequestedByUser(false);
     };
 
-    const timeout = setTimeout(scrollCarousel, requestedByUser ? 200 : 5000);
+    const timeout = setTimeout(scrollCarousel, requestedByUser ? 200 : 7000);
 
     return () => {
       clearTimeout(timeout);
@@ -72,11 +70,11 @@ const MoviesCarousel = ({ movies }: Props) => {
     <div className="h-full relative overflow-hidden">
       <div ref={containerRef} className="flex h-full w-full overflow-hidden">
         {movies.map((movie) => (
-          <MoviesCarouselItem key={movie.id} item={movie} />
+          <MoviesCarouselItem key={movie.id} movie={movie} />
         ))}
       </div>
       <div className="absolute z-50 bottom-4 left-0 flex w-full justify-center items-center">
-        <div className="rounded-full flex gap-1 lg:gap-4 items-center h-8 w-fit">
+        <div className="rounded-full flex gap-4 lg:gap-2 items-center h-8 w-fit">
           {movies.map((m, i) => (
             <div
               className="group grid place-items-center h-full cursor-pointer z-50"
@@ -85,9 +83,10 @@ const MoviesCarousel = ({ movies }: Props) => {
             >
               <div
                 className={clsx(
-                  "w-6 h-1 bg-slate-100 bg-opacity-30 rounded group-hover:bg-opacity-60",
+                  "w-8 h-2 lg:h-1 bg-slate-100 bg-opacity-30 rounded group-hover:bg-opacity-60",
                   "transition-all",
-                  currentIndex === i && "bg-green-300 bg-opacity-80"
+                  currentIndex === i && "bg-green-400 bg-opacity-80",
+                  autoplayPaused && "bg-orange-400"
                 )}
               />
             </div>
@@ -97,12 +96,15 @@ const MoviesCarousel = ({ movies }: Props) => {
       <div className="absolute z-50 top-4 right-4">
         <button
           onClick={handleToggleAutoplay}
-          className="appearance-none bg-transparent border-none cursor-pointer"
+          className={clsx(
+            "appearance-none bg-opacity-30 backdrop-blur-sm grid place-items-center h-9 w-9 rounded-full border-none cursor-pointer",
+            autoplayPaused ? "bg-orange-400" : "bg-green-400"
+          )}
         >
           {autoplayPaused ? (
             <Pause className="stroke-orange-400" />
           ) : (
-            <Play className="stroke-green-400" />
+            <Play className="ml-1 stroke-green-400" />
           )}
         </button>
       </div>

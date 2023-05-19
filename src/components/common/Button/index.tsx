@@ -23,10 +23,10 @@ const Button = ({
       type="button"
       className={clsx(
         //handle variants
-        variant == "primary" && "bg-blue-500 text-blue-500",
-        variant == "secondary" && "bg-slate-500 text-slate-500",
-        variant == "info" && "bg-orange-500 text-orange-500",
-        "flex items-center rounded-full bg-opacity-40 px-4 py-2 text-sm font-medium hover:bg-opacity-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75",
+        variant == "primary" && "bg-blue-500 text-white",
+        variant == "secondary" && "bg-slate-500 text-white",
+        variant == "info" && "bg-orange-500 text-white",
+        "flex border-[4px] border-white shadow-sm items-center rounded-full backdrop-blur-md bg-opacity-60 px-4 py-2 text-sm font-medium hover:bg-opacity-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75",
         props.className
       )}
     >
