@@ -26,7 +26,10 @@ const Button = ({
         variant == "primary" && "bg-blue-500 text-white",
         variant == "secondary" && "bg-slate-500 text-white",
         variant == "info" && "bg-orange-500 text-white",
-        "flex border-[4px] border-white shadow-sm items-center rounded-full backdrop-blur-md bg-opacity-60 px-4 py-2 text-sm font-medium hover:bg-opacity-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75",
+        "text-sm font-medium",
+        "flex items-center px-4 py-2",
+        "focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75",
+        "shadow-sm rounded-full backdrop-blur-md bg-opacity-80 hover:bg-opacity-100",
         props.className
       )}
     >

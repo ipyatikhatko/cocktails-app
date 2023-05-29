@@ -1,4 +1,4 @@
-export interface MovieCredits {
+export interface IMovieCredits {
   id: number;
   cast: Cast[];
   crew: Cast[];

@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import { MovieWithCredits } from "@/models/Movie";
+import { MovieWithCredits } from "@/models/IMovie";
 import { Star } from "react-feather";
 import { imagePath } from "@/utils/imagePath";
 

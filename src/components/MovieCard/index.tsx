@@ -2,7 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-import { Movie } from "@/models/Movie";
+import { Movie } from "@/models/IMovie";
 import { imagePath } from "@/utils/imagePath";
 import clsx from "clsx";
 
@@ -21,7 +21,7 @@ const MovieCard = ({ movie }: MovieCardProps) => {
         )}
       >
         <Image
-          className="transition-all filter brightness-90 group-hover:brightness-100 object-center object-cover"
+          className="transition-all filter brightness-100 group-hover:brightness-75 group-hover:scale-105 object-center object-cover"
           fill
           alt={movie.original_title}
           src={imagePath(movie.poster_path, "w1280")}

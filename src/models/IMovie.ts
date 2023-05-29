@@ -1,6 +1,6 @@
-import { MovieCredits } from "./MovieCredits";
+import { IMovieCredits } from "./IMovieCredits";
 
-export interface Movie {
+export interface IMovie {
   adult: boolean;
   backdrop_path: string;
   genre_ids: number[];
@@ -22,6 +22,6 @@ export enum OriginalLanguage {
   Fr = "fr",
 }
 
-export interface MovieWithCredits extends Movie {
-  credits: MovieCredits;
+export interface MovieWithCredits extends IMovie {
+  credits: IMovieCredits;
 }

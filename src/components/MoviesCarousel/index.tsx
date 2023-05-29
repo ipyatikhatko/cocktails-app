@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import MoviesCarouselItem from "./MoviesCarouselItem";
-import { MovieWithCredits } from "@/models/Movie";
+import { MovieWithCredits } from "@/models/IMovie";
 import clsx from "clsx";
 import { Play, Pause } from "react-feather";
 
