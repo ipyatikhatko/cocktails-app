@@ -67,7 +67,7 @@ const MoviesCarousel = ({ movies }: Props) => {
   ]);
 
   return (
-    <div className="h-full relative overflow-hidden">
+    <div className="h-full w-full relative overflow-hidden">
       <div ref={containerRef} className="flex h-full w-full overflow-hidden">
         {movies.map((movie) => (
           <MoviesCarouselItem key={movie.id} movie={movie} />
