@@ -23,14 +23,14 @@ const MoviesCarouselItem = ({ movie }: Props) => {
           src={imagePath(movie.backdrop_path, "w1280")}
         />
       </div>
-      <div className="p-4 sm:gap-4 flex flex-col sm:flex-row w-full h-full">
-        <div className="h-full relative sm:block sm:w-1/3">
+      <div className="p-4 sm:gap-4 flex flex-col sm:flex-row mx-auto max-w-screen-xl h-full">
+        <div className="rounded-xl overflow-hidden h-[500px] w-[280px] sm:h-[400px] md:h-[470px] md:w-[320px] relative sm:block">
           <Image
             draggable={false}
             alt="poster"
             fill
             style={{
-              objectFit: "contain",
+              objectFit: "cover",
             }}
             src={imagePath(movie.poster_path, "w780")}
           />
