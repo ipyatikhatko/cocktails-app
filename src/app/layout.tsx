@@ -18,11 +18,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <QueryProvider>
-          <nav className="px-4 h-[8vh] w-full flex items-center backdrop-blur-sm fixed top-0 left-0 z-[55]">
-            <div className="absolute inset-0 bg-gradient-to-br from-white to-blue-400 opacity-60"></div>
+    <QueryProvider>
+      <html lang="en">
+        <body className={inter.className}>
+          <nav className="px-4 h-[8vh] w-full flex items-center backdrop-blur-sm fixed top-0 left-0 z-[55] bg-blue-400 bg-opacity-60">
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-blue-700 opacity-60"></div>
             <TextField
               startIcon={<Search className="text-slate-500" size={18} />}
               containerClassName="z-50 p-2 rounded-full bg-white border border-slate-200 shadow-md w-[260px]"
@@ -33,8 +33,8 @@ export default function RootLayout({
             />
           </nav>
           <main className="pt-[8vh]">{children}</main>
-        </QueryProvider>
-      </body>
-    </html>
+        </body>
+      </html>
+    </QueryProvider>
   );
 }
