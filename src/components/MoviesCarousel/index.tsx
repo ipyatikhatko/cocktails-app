@@ -14,6 +14,7 @@ const MoviesCarousel = ({ movies }: Props) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedSlide, setSelectedSlide] = useState(0);
   const [requestedByUser, setRequestedByUser] = useState(false);
+  const [autoplayPaused, setAutoplayPaused] = useState(false);
 
   const handleSelectItem = (event: React.MouseEvent, index: number) => {
     event.stopPropagation();
@@ -21,12 +22,17 @@ const MoviesCarousel = ({ movies }: Props) => {
     setRequestedByUser(true);
   };
 
+  const handleToggleAutoplay = () => {
+    setAutoplayPaused(!autoplayPaused);
+    setRequestedByUser(false);
+  };
+
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
 
     const scrollCarousel = () => {
-      if (!requestedByUser) {
+      if (!autoplayPaused && !requestedByUser) {
         let nextIndex = (currentIndex + 1) % movies.length;
         let nextPosition = nextIndex * container.offsetWidth;
 
@@ -41,18 +47,24 @@ const MoviesCarousel = ({ movies }: Props) => {
         setCurrentIndex(selectedSlide);
         container.scrollTo({
           left: nextPosition,
-          behavior: "instant",
+          behavior: "smooth",
         });
       }
       setRequestedByUser(false);
     };
 
-    const timeout = setTimeout(scrollCarousel, requestedByUser ? 200 : 10000);
+    const timeout = setTimeout(scrollCarousel, requestedByUser ? 200 : 7000);
 
     return () => {
       clearTimeout(timeout);
     };
-  }, [currentIndex, selectedSlide, requestedByUser, movies.length]);
+  }, [
+    currentIndex,
+    selectedSlide,
+    requestedByUser,
+    autoplayPaused,
+    movies.length,
+  ]);
 
   return (
     <div className="h-full w-full relative overflow-hidden">
@@ -73,12 +85,28 @@ const MoviesCarousel = ({ movies }: Props) => {
                 className={clsx(
                   "w-8 h-2 lg:h-1 bg-slate-100 bg-opacity-30 rounded group-hover:bg-opacity-60",
                   "transition-all",
-                  currentIndex === i && "bg-opacity-80"
+                  currentIndex === i && "bg-green-400 bg-opacity-80",
+                  autoplayPaused && "bg-orange-400"
                 )}
               />
             </div>
           ))}
         </div>
+      </div>
+      <div className="absolute z-50 top-4 right-4">
+        <button
+          onClick={handleToggleAutoplay}
+          className={clsx(
+            "appearance-none bg-opacity-30 backdrop-blur-sm grid place-items-center h-9 w-9 rounded-full border-none cursor-pointer",
+            autoplayPaused ? "bg-orange-400" : "bg-green-400"
+          )}
+        >
+          {autoplayPaused ? (
+            <Pause className="stroke-orange-400" />
+          ) : (
+            <Play className="ml-1 stroke-green-400" />
+          )}
+        </button>
       </div>
     </div>
   );
