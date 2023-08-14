@@ -18,98 +18,131 @@ export default async function Page(props: { params: { id: string } }) {
     overview,
     genres,
     budget,
+    production_companies,
+    tagline,
     revenue,
   } = movieDetails.data;
 
   const { cast } = movieCredits.data;
 
   return (
-    <main className="h-full">
-      <section className="relative h-[70vh] lg:h-[60vh] overflow-hidden">
-        <Image
-          alt="poster-backdrop"
-          src={imagePath(backdrop_path, "w1280")}
-          blurDataURL={imagePath(poster_path, "w342")}
-          placeholder="blur"
-          style={{
-            filter: "blur(2px)",
-            scale: 1.1,
-            objectFit: "cover",
-          }}
-          fill
-        />
-        <div className="w-full h-full flex justify-center items-center sm:justify-start lg:mx-auto lg:my-0 lg:max-w-screen-xl">
-          <div className="rounded-xl ml-4 overflow-hidden relative w-[300px] h-[450px] lg:w-[380px] lg:h-[570px]">
-            <Image
-              alt="poster"
-              src={imagePath(poster_path, "w1280")}
-              blurDataURL={imagePath(poster_path, "w342")}
-              placeholder="blur"
-              style={{
-                objectFit: "cover",
-              }}
-              fill
-            />
+    <main className="h-full mx-4 lg:mx-auto lg:my-0 lg:max-w-screen-xl">
+      <section className="flex h-[60vh] rounded-xl overflow-hidden mt-8 shadow-xl shadow-black/80">
+        <div className="relative w-[380px] h-full">
+          <Image
+            alt="poster"
+            src={imagePath(poster_path, "w780")}
+            blurDataURL={imagePath(poster_path, "w342")}
+            placeholder="blur"
+            style={{
+              objectFit: "cover",
+            }}
+            fill
+          />
+        </div>
+        <div className="relative flex-1">
+          <div className="absolute z-50 p-4 top-0 left-0 w-full h-full flex flex-col justify-between">
+            <div>
+              <div className="flex justify-between items-center">
+                <span className="font-bold text-2xl ">{title}</span>
+                <span className="flex">
+                  <Star className="text-yellow-400" />
+                  <span>{vote_average.toFixed(2)}</span>
+                </span>
+              </div>
+              <hr />
+              <h4 className="mb-4 text-xl text-slate-700">
+                &quot;{tagline}&quot;
+              </h4>
+            </div>
+            <div className="divide-y divide-white/50 text-white flex flex-col gap-2 [&>div]:pt-2">
+              <div className="flex gap-2 justify-between">
+                <span className="font-light">Release date:</span>
+                <span className="bg-black text-white px-2 py-1">
+                  {new Date(release_date).toLocaleDateString("en-US")}
+                </span>
+              </div>
+              <div className="flex justify-between">
+                <span className="font-light">Genre:</span>
+                <div className="flex flex-wrap gap-2">
+                  {genres.map((genre) => (
+                    <span
+                      key={genre.id}
+                      className="bg-black text-white px-2 py-1 rounded-full font-thin h-fit text-sm grid place-items-center"
+                    >
+                      {genre.name}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <div className="flex justify-between">
+                <span className="font-light">Country:</span>
+                <div className="flex flex-wrap gap-2">
+                  {production_countries.map((country) => (
+                    <span
+                      key={country.iso_3166_1}
+                      className="bg-black text-white px-2 py-1 rounded-full font-thin text-sm grid place-items-center"
+                    >
+                      {country.name}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="font-light">Budget:</span>
+                <span className="font-thin ">{budget.toLocaleString()}$</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="font-light">Revenue:</span>
+                <span className="font-thin ">{revenue.toLocaleString()}$</span>
+              </div>
+            </div>
           </div>
+          <Image
+            alt="poster-backdrop"
+            src={imagePath(backdrop_path, "w1280")}
+            blurDataURL={imagePath(poster_path, "w342")}
+            placeholder="blur"
+            className="hidden lg:block"
+            style={{
+              filter: "saturate(0.5)",
+              objectFit: "cover",
+            }}
+            fill
+          />
+          <div className="bg-gradient-to-b from-white via-transparent to-black w-full h-full top-0 left-0 absolute" />
         </div>
       </section>
-      <section className="p-4 lg:mx-auto lg:my-0 lg:max-w-screen-xl">
-        <h3 className="font-bold text-2xl mb-4">{title}</h3>
+      <section className="pt-4">
+        <div className="flex gap-4 justify-center items-center h-full">
+          {production_companies
+            .filter((v) => !!v.logo_path)
+            .map((pc) => (
+              <Image
+                width={125}
+                height={65}
+                style={{
+                  maxHeight: 65,
+                  objectFit: "contain",
+                }}
+                key={pc.id}
+                src={imagePath(pc.logo_path, "w185")}
+                alt={pc.name}
+              />
+            ))}
+        </div>
+      </section>
+      <hr className="lg:border-none my-4" />
+      <section>
         <div className="flex flex-col gap-2">
-          <div className="flex gap-2">
-            <Star className="text-yellow-400" />
-            <span>{vote_average.toFixed(2)}</span>
-          </div>
-          <div className="flex gap-2">
-            <span className="font-bold">Release date:</span>
-            <span>{new Date(release_date).toLocaleDateString("en-US")}</span>
-          </div>
-          <div className="flex gap-2">
-            <span className="font-bold">Genre:</span>
-            <div className="flex flex-wrap gap-1">
-              {genres.map((genre) => (
-                <span
-                  key={genre.id}
-                  className="bg-gray-200 px-2 py-1 rounded font-thin text-sm grid place-items-center"
-                >
-                  {genre.name}
-                </span>
-              ))}
-            </div>
-          </div>
-          <div className="flex gap-2">
-            <span className="font-bold">Country:</span>
-            <div className="flex flex-wrap gap-1">
-              {production_countries.map((country) => (
-                <span
-                  key={country.iso_3166_1}
-                  className="bg-gray-200 px-2 py-1 rounded font-thin text-sm grid place-items-center"
-                >
-                  {country.name}
-                </span>
-              ))}
-            </div>
-          </div>
-          <div className="flex gap-2">
-            <span className="font-bold">Budget:</span>
-            <span className="font-thin text-sm">
-              {budget.toLocaleString()}$
-            </span>
-          </div>
-          <div className="flex gap-2">
-            <span className="font-bold">Revenue:</span>
-            <span className="font-thin text-sm">
-              {revenue.toLocaleString()}$
-            </span>
-          </div>
-          <div className="flex flex-col gap-2">
-            <span className="font-bold">Overview:</span>
-            <p className="font-thin text-sm lg:w-2/3">{overview}</p>
-          </div>
+          <span className="font-bold text-xl mb-4">Overview:</span>
+          <p className="font-thin text-sm lg:text-2xl text-slate-700">
+            {overview}
+          </p>
         </div>
       </section>
-      <hr />
-      <MovieCast cast={cast} />
+      <hr className="my-4" />
+      <MovieCast className="mb-8" cast={cast} />
     </main>
   );
 }

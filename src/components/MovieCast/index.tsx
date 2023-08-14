@@ -9,9 +9,10 @@ import noImage from "@/assets/no-image.jpeg";
 
 type Props = {
   cast: IMovieCredits["cast"];
+  className?: string;
 };
 
-const MovieCast = ({ cast }: Props) => {
+const MovieCast = ({ cast, className }: Props) => {
   const containerRef = useRef<HTMLElement>(null);
   const [allCast, setAllCast] = useState(false);
   const showToggle = useMemo(() => cast.length > 12, [cast]);
@@ -24,11 +25,8 @@ const MovieCast = ({ cast }: Props) => {
 
   const toggleCast = () => setAllCast((prev) => !prev);
   return (
-    <section
-      ref={containerRef}
-      className="p-4 lg:mx-auto lg:my-0 lg:max-w-screen-xl"
-    >
-      <h3 className="font-bold text-2xl mb-4">Cast</h3>
+    <section ref={containerRef} className={className}>
+      <h3 className="font-bold text-xl mb-4">Cast</h3>
       <div
         className={clsx(
           "relative pb-16 rounded-xl",
