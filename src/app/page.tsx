@@ -11,7 +11,7 @@ export default async function Home() {
   const movieGenres = await getMovieGenres("en");
   return (
     <>
-      <div className="flex flex-nowrap h-[70vh] w-full">
+      <div className="lg:max-w-screen-xl mx-auto overflow-hidden rounded-xl h-[70vh] xl:h-[50vh] w-full">
         <PopularMoviesCarousel movies={carouselMovies.results.slice(0, 6)} />
       </div>
       <section className="px-4 my-4 lg:max-w-screen-xl mx-auto">
