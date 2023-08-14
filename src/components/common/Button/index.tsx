@@ -35,7 +35,7 @@ const Button = ({
     >
       {startIcon && <div className="max-w-[24px] mr-4">{startIcon}</div>}
       {children && children}
-      {label && <span className="flex-1">{label}</span>}
+      {label && !children && <span className="flex-1">{label}</span>}
       {endIcon && <div className="max-w-[24px] ml-4">{endIcon}</div>}
     </button>
   );
