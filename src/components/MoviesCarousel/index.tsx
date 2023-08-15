@@ -41,7 +41,7 @@ const MoviesCarousel = ({ movies }: Props) => {
         setCurrentIndex(selectedSlide);
         container.scrollTo({
           left: nextPosition,
-          behavior: "instant",
+          behavior: "smooth",
         });
       }
       setRequestedByUser(false);
