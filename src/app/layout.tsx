@@ -21,9 +21,9 @@ export default function RootLayout({
   return (
     <QueryProvider>
       <html lang="en">
-        <body className={inter.className}>
+        <body className={clsx(inter.className)}>
           <NavBar />
-          <main className="pt-28">{children}</main>
+          <main className="pt-[8vh] xs:pt-28">{children}</main>
         </body>
       </html>
     </QueryProvider>
