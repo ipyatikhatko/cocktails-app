@@ -27,24 +27,22 @@ export default async function Page(props: { params: { id: string } }) {
 
   return (
     <main className="h-full lg:mx-auto  lg:max-w-screen-xl">
-      {/* <header className="mx-4 lg:my-0">
-        <div className="flex justify-between items-start">
+      <header className="mx-4 my-4 xs:mt-0">
+        <div className="flex xs:flex-col justify-between items-start">
           <div className="flex flex-col">
             <span className="font-bold text-lg sm:text-2xl leading-tight">
               {title}
             </span>
-            <h4 className="mb-4 text-sm text-slate-700">
-              &quot;{tagline}&quot;
-            </h4>
+            <h4 className="text-sm text-slate-700">&quot;{tagline}&quot;</h4>
           </div>
           <span className="flex">
             <Star className="text-yellow-400" />
             <span>{vote_average.toFixed(2)}</span>
           </span>
         </div>
-      </header> */}
+      </header>
       <section className="sm:mx-4 lg:my-0 flex flex-col sm:flex-row sm:rounded-xl overflow-hidden mt-2 shadow-xl shadow-black/50">
-        <div className="relative grid place-items-center p-4 sm:p-4 w-full sm:w-[20vw] h-full">
+        <div className="relative grid place-items-center p-4 sm:p-4 w-full sm:w-[30vw] h-full">
           <Image
             fill
             alt="poster"
@@ -57,27 +55,13 @@ export default async function Page(props: { params: { id: string } }) {
             }}
           />
           <div className="bg-gradient-to-b from-white via-transparent to-transparent w-full h-full top-0 left-0 absolute" />
-          <div className="z-50 flex justify-between items-start">
-            <div className="flex flex-col">
-              <span className="font-bold text-lg sm:text-2xl leading-tight">
-                {title}
-              </span>
-              <h4 className="mb-4 text-sm text-slate-700">
-                &quot;{tagline}&quot;
-              </h4>
-            </div>
-            <span className="flex">
-              <Star className="text-yellow-400" />
-              <span>{vote_average.toFixed(2)}</span>
-            </span>
-          </div>
           <div className="z-50 w-fit rounded-xl overflow-hidden">
             <Image
               alt="poster"
               width={320}
               height={640}
               src={imagePath(poster_path, "w780")}
-              className="w-[70vw] sm:w-[15vw]"
+              className="w-[50vw] sm:w-[20vw]"
               blurDataURL={imagePath(poster_path, "w342")}
               placeholder="blur"
               style={{

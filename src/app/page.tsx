@@ -11,8 +11,11 @@ export default async function Home() {
   const movieGenres = await getMovieGenres("en");
   return (
     <>
-      <div className="lg:max-w-screen-xl mx-auto overflow-hidden rounded-xl h-fit w-full">
-        <PopularMoviesCarousel movies={carouselMovies.results.slice(0, 6)} />
+      <div className="lg:max-w-screen-xl xs:mx-4 lg:mx-auto overflow-hidden">
+        <PopularMoviesCarousel
+          containerClassName="xs:rounded-xl"
+          movies={carouselMovies.results.slice(0, 6)}
+        />
       </div>
       <section className="px-4 my-4 lg:max-w-screen-xl mx-auto">
         <h1 className="w-fit text-xl text-blue-400">Discover movies</h1>

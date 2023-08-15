@@ -10,45 +10,39 @@ type Props = {
 
 const MoviesCarouselItem = ({ movie }: Props) => {
   return (
-    <div className="relative flex h-full w-full min-w-full overflow-hidden">
-      <div className="z-40 absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent to-black" />
-      <div className="absolute top-0 left-0 w-full h-full filter sm:brightness-50 blur-sm sm:blur-none scale-110">
+    <div className="relative flex h-full w-full min-w-full min-h-full overflow-hidden">
+      <div className="z-40 absolute top-0 left-0 w-full h-full bg-gradient-to-b from-black/50 to-transparent" />
+      <div className="absolute top-0 left-0 w-full h-full filter sm:brightness-50">
         <Image
           draggable={false}
           fill
           alt="movie"
           style={{
-            objectPosition: "center",
             objectFit: "cover",
           }}
           src={imagePath(movie.backdrop_path, "w1280")}
         />
       </div>
-      <div className="p-4 sm:gap-4 flex flex-col sm:flex-row mx-auto max-w-screen-xl h-fit">
-        <div className="z-50 rounded-xl overflow-hidden h-[500px] w-[280px] sm:h-[400px] md:h-[470px] md:w-[320px] relative sm:block">
-          <Image
-            draggable={false}
-            alt="poster"
-            fill
-            style={{
-              objectFit: "cover",
-            }}
-            src={imagePath(movie.poster_path, "w780")}
-          />
-        </div>
-        <div className="z-50 w-full sm:w-2/3 justify-between flex flex-col gap-3 pb-8">
-          <div>
-            <h1 className="text-lg text-center sm:text-start sm:text-3xl font-bold text-white sm:w-[80%]">
-              {movie.title}
-            </h1>
-            <div className="flex items-center justify-center sm:justify-start gap-1">
-              <Star height={15} className="stroke-yellow-400" />
-              <span className="text-yellow-400">{movie.vote_average}</span>
-              <span className="text-white text-sm">({movie.vote_count})</span>
-            </div>
+      <div className="p-4 sm:gap-4 flex flex-col mx-auto max-w-screen-xl h-fit">
+        <h1 className="mb-4 z-50 text-sm sm:text-2xl font-bold text-white">
+          {movie.title}
+        </h1>
+        <div className="flex flex-col xs:flex-row items-center xs:items-end">
+          <div className="z-50 rounded-xl overflow-hidden sm:block">
+            <Image
+              draggable={false}
+              width={320}
+              height={640}
+              className="w-[280px] sm:h-[400px] md:h-[470px] md:w-[320px]"
+              alt="poster"
+              style={{
+                objectFit: "cover",
+              }}
+              src={imagePath(movie.poster_path, "w780")}
+            />
           </div>
-          <div>
-            <p className="text-left lg:text-xl font-thin text-white leading-loose line-clamp-13">
+          <div className="hidden z-50 w-full h-full sm:w-2/3 xs:flex items-end justify-end p-4 bg-black/50">
+            <p className="text-sm lg:text-xl font-thin text-white leading-loose line-clamp-4 md:line-clamp-13">
               {movie.overview}
             </p>
           </div>

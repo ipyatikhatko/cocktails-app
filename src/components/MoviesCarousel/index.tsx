@@ -7,9 +7,10 @@ import { Play, Pause } from "react-feather";
 
 type Props = {
   movies: MovieWithCredits[];
+  containerClassName?: string;
 };
 
-const MoviesCarousel = ({ movies }: Props) => {
+const MoviesCarousel = ({ movies, containerClassName }: Props) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedSlide, setSelectedSlide] = useState(0);
@@ -55,13 +56,19 @@ const MoviesCarousel = ({ movies }: Props) => {
   }, [currentIndex, selectedSlide, requestedByUser, movies.length]);
 
   return (
-    <div className="h-full w-full relative overflow-hidden">
-      <div ref={containerRef} className="flex h-full w-full overflow-hidden">
+    <div className="flex flex-col relative overflow-hidden">
+      <div
+        ref={containerRef}
+        className={clsx(
+          "flex h-full w-full overflow-hidden",
+          containerClassName
+        )}
+      >
         {movies.map((movie) => (
           <MoviesCarouselItem key={movie.id} movie={movie} />
         ))}
       </div>
-      <div className="absolute z-50 bottom-4 left-0 flex w-full justify-center items-center">
+      <div className="flex w-full justify-center items-center">
         <div className="rounded-full flex gap-4 lg:gap-2 items-center h-8 w-fit">
           {movies.map((m, i) => (
             <div
@@ -71,9 +78,9 @@ const MoviesCarousel = ({ movies }: Props) => {
             >
               <div
                 className={clsx(
-                  "w-8 h-2 lg:h-1 bg-slate-100 bg-opacity-30 rounded group-hover:bg-opacity-60",
+                  "w-8 h-2 lg:h-1 bg-slate-200 rounded group-hover:bg-opacity-60",
                   "transition-all",
-                  currentIndex === i && "bg-opacity-80"
+                  currentIndex === i && "bg-slate-400"
                 )}
               />
             </div>
