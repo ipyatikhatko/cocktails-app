@@ -15,6 +15,12 @@ const MoviesCarousel = ({ movies, containerClassName }: Props) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedSlide, setSelectedSlide] = useState(0);
   const [requestedByUser, setRequestedByUser] = useState(false);
+  const [loadedImagesCount, setLoadedImagesCount] = useState(0); // Track loaded images count
+
+  // Callback function to handle image load notification
+  const handleImageLoad = () => {
+    setLoadedImagesCount((prevCount) => prevCount + 1);
+  };
 
   const handleSelectItem = (event: React.MouseEvent, index: number) => {
     event.stopPropagation();
@@ -55,17 +61,29 @@ const MoviesCarousel = ({ movies, containerClassName }: Props) => {
     };
   }, [currentIndex, selectedSlide, requestedByUser, movies.length]);
 
+  const allImagesLoaded = loadedImagesCount === movies.length;
+
   return (
-    <div className="flex flex-col relative overflow-hidden">
+    <div className={clsx("flex flex-col relative overflow-hidden")}>
+      {!allImagesLoaded && (
+        <div className="z-50 absolute top-0 left-0 w-full h-full bg-gray-300 animate-pulse grid place-items-center">
+          <h3 className="text-center">Loading carousel</h3>
+        </div>
+      )}
       <div
         ref={containerRef}
         className={clsx(
-          "flex h-full w-full overflow-hidden",
+          "flex h-full w-full overflow-hidden transition-opacity duration-500",
+          !allImagesLoaded ? "opacity-0" : "opacity-100",
           containerClassName
         )}
       >
         {movies.map((movie) => (
-          <MoviesCarouselItem key={movie.id} movie={movie} />
+          <MoviesCarouselItem
+            key={movie.id}
+            movie={movie}
+            onImageLoad={handleImageLoad}
+          />
         ))}
       </div>
       <div className="flex w-full justify-center items-center">

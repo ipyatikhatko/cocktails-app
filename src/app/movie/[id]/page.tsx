@@ -42,8 +42,9 @@ export default async function Page(props: { params: { id: string } }) {
         </div>
       </header>
       <section className="sm:mx-4 lg:my-0 flex flex-col sm:flex-row sm:rounded-xl overflow-hidden mt-2 shadow-xl shadow-black/50">
-        <div className="relative grid place-items-center p-4 sm:p-4 w-full sm:w-[30vw] h-full">
+        <div className="relative flex justify-center p-4 sm:p-4 w-full sm:w-[30vw] h-full">
           <Image
+            priority
             fill
             alt="poster"
             className="blur scale-110"
@@ -55,8 +56,9 @@ export default async function Page(props: { params: { id: string } }) {
             }}
           />
           <div className="bg-gradient-to-b from-white via-transparent to-transparent w-full h-full top-0 left-0 absolute" />
-          <div className="z-50 w-fit rounded-xl overflow-hidden">
+          <div className="z-50 w-fit h-fit rounded-xl overflow-hidden">
             <Image
+              priority
               alt="poster"
               width={320}
               height={640}
@@ -72,6 +74,7 @@ export default async function Page(props: { params: { id: string } }) {
         </div>
         <div className="relative h-fit sm:h-auto sm:flex-1">
           <Image
+            priority
             alt="poster-backdrop"
             src={imagePath(backdrop_path, "w1280")}
             blurDataURL={imagePath(poster_path, "w342")}
