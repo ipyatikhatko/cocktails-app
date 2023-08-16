@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { MovieWithCredits } from "@/models/IMovie";
 import { Star } from "react-feather";
@@ -6,17 +6,23 @@ import { imagePath } from "@/utils/imagePath";
 
 type Props = {
   movie: MovieWithCredits;
+  onImageLoad: () => void;
 };
 
-const MoviesCarouselItem = ({ movie }: Props) => {
+const MoviesCarouselItem = ({ movie, onImageLoad }: Props) => {
+  const handleImageLoad = () => {
+    onImageLoad();
+  };
   return (
     <div className="relative flex h-full w-full min-w-full min-h-full overflow-hidden">
       <div className="z-40 absolute top-0 left-0 w-full h-full bg-gradient-to-b from-black/50 to-transparent" />
       <div className="absolute top-0 left-0 w-full h-full filter sm:brightness-50">
         <Image
+          priority
           draggable={false}
           fill
           alt="movie"
+          onLoad={handleImageLoad}
           style={{
             objectFit: "cover",
           }}
@@ -30,6 +36,7 @@ const MoviesCarouselItem = ({ movie }: Props) => {
         <div className="flex flex-col xs:flex-row items-center xs:items-end">
           <div className="z-50 rounded-xl overflow-hidden sm:block">
             <Image
+              priority
               draggable={false}
               width={320}
               height={640}
