@@ -34,16 +34,18 @@ const MovieCast = ({ cast, className }: Props) => {
           allCast && "h-fit"
         )}
       >
-        <div
-          className={clsx(
-            "z-50 pb-4 absolute bottom-0 left-0 right-0 w-full flex justify-center",
-            !allCast && "bg-gradient-to-b from-transparent to-slate-200"
-          )}
-        >
-          <Button onClick={toggleCast} className="shadow-lg shadow-slate-400">
-            Show {allCast ? "less" : "more"}
-          </Button>
-        </div>
+        {showToggle && (
+          <div
+            className={clsx(
+              "z-50 pb-4 absolute bottom-0 left-0 right-0 w-full flex justify-center",
+              !allCast && "bg-gradient-to-b from-transparent to-slate-200"
+            )}
+          >
+            <Button onClick={toggleCast} className="shadow-lg shadow-slate-400">
+              Show {allCast ? "less" : "more"}
+            </Button>
+          </div>
+        )}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-y-4">
           {cast.map((person) => (
             <div
