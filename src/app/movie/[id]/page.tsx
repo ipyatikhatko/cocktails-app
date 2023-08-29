@@ -27,7 +27,7 @@ export default async function Page(props: { params: { id: string } }) {
   const { cast } = movieCredits.data;
 
   return (
-    <main className="h-full lg:mx-auto  lg:max-w-screen-xl">
+    <main className="h-full lg:mx-auto lg:max-w-screen-xl">
       <header className="mx-4 my-4 xs:mt-0">
         <div className="flex xs:flex-col justify-between items-start">
           <div className="flex flex-col">
@@ -44,7 +44,7 @@ export default async function Page(props: { params: { id: string } }) {
           </span>
         </div>
       </header>
-      <section className="sm:mx-4 lg:my-0 flex flex-col sm:flex-row sm:rounded-xl overflow-hidden mt-2 shadow-xl sm:shadow-black/50">
+      <section className="sm:mx-6 lg:my-0 flex flex-col sm:flex-row sm:rounded-xl overflow-hidden mt-2 shadow-xl sm:shadow-black/50">
         <div className="relative flex justify-center p-4 sm:p-4 w-full sm:w-[30vw] h-full">
           <Image
             priority

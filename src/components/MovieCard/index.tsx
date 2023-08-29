@@ -4,7 +4,6 @@ import React from "react";
 import Image from "next/image";
 import { IMovie } from "@/models/IMovie";
 import { imagePath } from "@/utils/imagePath";
-import clsx from "clsx";
 
 type MovieCardProps = {
   movie: IMovie;
@@ -14,7 +13,7 @@ const MovieCard = ({ movie }: MovieCardProps) => {
   return (
     <div key={movie.id} className="group flex flex-col gap-2">
       <Image
-        className="transition-all filter brightness-100 group-hover:brightness-75 group-hover:scale-105 object-center object-cover"
+        className="transition-all rounded-lg filter brightness-100 group-hover:brightness-75 object-center object-cover"
         width={320}
         height={400}
         alt={movie.original_title}

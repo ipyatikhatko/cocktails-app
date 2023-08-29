@@ -11,7 +11,7 @@ export default async function Home() {
   const movieGenres = await getMovieGenres("en");
   return (
     <>
-      <div className="lg:max-w-screen-xl xs:mx-4 lg:mx-auto overflow-hidden">
+      <div className="px-4 my-4 lg:max-w-screen-xl mx-auto overflow-hidden">
         <PopularMoviesCarousel
           containerClassName="xs:rounded-xl"
           movies={carouselMovies.results.slice(0, 6)}
@@ -26,7 +26,7 @@ export default async function Home() {
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 sm:gap-x-2 lg:grid-cols-4 lg:gap-x-4 gap-x-1 gap-y-5">
           {carouselMovies.results.map((movie) => (
-            <Link key={movie.id} href={`/movie/${movie.id}`}>
+            <Link scroll={false} key={movie.id} href={`/movie/${movie.id}`}>
               <MovieCard movie={movie} />
             </Link>
           ))}
