@@ -3,6 +3,7 @@ import Image from "next/image";
 import { imagePath } from "@/utils/imagePath";
 import { Star } from "react-feather";
 import MovieCast from "@/components/MovieCast";
+import MoviePageSkeleton from "./loading";
 
 export default async function Page(props: { params: { id: string } }) {
   const movieDetails = await getMovieDetails(props.params.id);
@@ -26,14 +27,16 @@ export default async function Page(props: { params: { id: string } }) {
   const { cast } = movieCredits.data;
 
   return (
-    <main className="h-full lg:mx-auto  lg:max-w-screen-xl">
+    <main className="h-full lg:mx-auto lg:max-w-screen-xl">
       <header className="mx-4 my-4 xs:mt-0">
         <div className="flex xs:flex-col justify-between items-start">
           <div className="flex flex-col">
             <span className="font-bold text-lg sm:text-2xl leading-tight">
               {title}
             </span>
-            <h4 className="text-sm text-slate-700">&quot;{tagline}&quot;</h4>
+            {tagline && (
+              <h4 className="text-sm text-slate-700">&quot;{tagline}&quot;</h4>
+            )}
           </div>
           <span className="flex">
             <Star className="text-yellow-400" />
@@ -41,7 +44,7 @@ export default async function Page(props: { params: { id: string } }) {
           </span>
         </div>
       </header>
-      <section className="sm:mx-4 lg:my-0 flex flex-col sm:flex-row sm:rounded-xl overflow-hidden mt-2 shadow-xl shadow-black/50">
+      <section className="sm:mx-6 lg:my-0 flex flex-col sm:flex-row sm:rounded-xl overflow-hidden mt-2 shadow-xl sm:shadow-black/50">
         <div className="relative flex justify-center p-4 sm:p-4 w-full sm:w-[30vw] h-full">
           <Image
             priority
@@ -55,7 +58,7 @@ export default async function Page(props: { params: { id: string } }) {
               objectFit: "cover",
             }}
           />
-          <div className="bg-gradient-to-b from-white via-transparent to-transparent w-full h-full top-0 left-0 absolute" />
+          <div className="bg-gradient-to-b from-slate-100 via-transparent to-transparent w-full h-full top-0 left-0 absolute" />
           <div className="z-50 w-fit h-fit rounded-xl overflow-hidden">
             <Image
               priority
@@ -88,13 +91,13 @@ export default async function Page(props: { params: { id: string } }) {
           <div className="bg-gradient-to-r from-black/90 to-white/70 w-full h-full top-0 left-0 absolute" />
           <div className="relative p-2 sm:p-4 w-full h-full flex flex-col justify-center max-w-md xs:mx-auto sm:mx-0">
             <div className="text-white divide-y divide-white/20 text-xs flex flex-col gap-2 [&>div]:pt-2">
-              <div className="flex gap-2 justify-between">
+              <div className="flex gap-2 items-center justify-between">
                 <span className="font-light">Release date:</span>
                 <span className="bg-black text-white px-2 py-1 rounded-full">
                   {new Date(release_date).toLocaleDateString("en-US")}
                 </span>
               </div>
-              <div className="flex gap-2 xs:gap-0 xs:justify-between xs:flex-wrap">
+              <div className="flex justify-between items-center flex-wrap">
                 <span className="font-light">Genre:</span>
                 <div className="flex flex-wrap gap-2">
                   {genres.map((genre) => (
@@ -107,7 +110,7 @@ export default async function Page(props: { params: { id: string } }) {
                   ))}
                 </div>
               </div>
-              <div className="flex justify-between flex-wrap">
+              <div className="flex justify-between items-center flex-wrap">
                 <span className="font-light">Country:</span>
                 <div className="flex flex-wrap gap-2">
                   {production_countries.map((country) => (
@@ -145,6 +148,7 @@ export default async function Page(props: { params: { id: string } }) {
                 width={125}
                 height={65}
                 style={{
+                  filter: "drop-shadow(0px 0px 2px #222)",
                   maxHeight: 65,
                   objectFit: "contain",
                 }}

@@ -2,7 +2,7 @@ import TextField from "@/components/common/TextField";
 import "./globals.css";
 import { Poppins } from "next/font/google";
 import clsx from "clsx";
-import { Search } from "react-feather";
+import { Film, Search } from "react-feather";
 import QueryProvider from "@/QueryProvider";
 import NavBar from "@/components/layout/NavBar";
 
@@ -21,9 +21,9 @@ export default function RootLayout({
   return (
     <QueryProvider>
       <html lang="en">
-        <body className={clsx(inter.className)}>
+        <body className={clsx(inter.className, "bg-slate-100")}>
           <NavBar />
-          <main className="pt-[8vh] xs:pt-28">{children}</main>
+          <main className="z-50 pt-[8vh] xs:pt-28">{children}</main>
         </body>
       </html>
     </QueryProvider>
