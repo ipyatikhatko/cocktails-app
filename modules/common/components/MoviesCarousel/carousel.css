@@ -1,0 +1,37 @@
+.slide-group {
+  .slide-item {
+    transition: opacity 0.2s ease;
+  }
+
+  .slide-item-info {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+  &:hover {
+    .slide-item {
+      opacity: 0.2;
+    }
+  }
+}
+
+.default-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.7) 0%,
+    transparent 15%,
+    transparent 85%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+  transition: opacity 0.3s ease;
+}
+
+.slide-item {
+  &:hover {
+    opacity: 1 !important;
+    .slide-item-info {
+      opacity: 1;
+    }
+  }
+}
